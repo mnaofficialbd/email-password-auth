@@ -13,7 +13,7 @@ function App() {
   const [validated, setValidated] = useState(false);
   const [registered, setRegistered] = useState(false)
   const [error, setError] = useState('')
-  const [name,setName]=useState('')
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
 
@@ -52,7 +52,7 @@ function App() {
         .then(result => {
           const user = result.user;
           console.log(user);
-          
+
         })
         .catch(error => {
           setError(error.message)
@@ -76,16 +76,16 @@ function App() {
     event.preventDefault()
   }
 
-  const setUserName=()=>{
+  const setUserName = () => {
     updateProfile(auth.currentUser, {
       displayName: name
     })
-    .then(()=>{
-      console.log('update name');
-    })
-    .catch(error=>{
-      setError(error.message)
-    })
+      .then(() => {
+        console.log('update name');
+      })
+      .catch(error => {
+        setError(error.message)
+      })
   }
 
   const verifyEmail = () => {
