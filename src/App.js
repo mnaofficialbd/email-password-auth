@@ -1,29 +1,40 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import app from './firebase.init';
 import { Form } from 'react-bootstrap';
-import  Button  from 'react-bootstrap/Button';
+import Button from 'react-bootstrap/Button';
+import React, { useState } from 'react'
 
 const auth = getAuth(app);
 
-function App() {
 
-   const handleEmailBlur = (event) => {
-    console.log(event.target.value);
+function App() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('')
+
+  const handleEmailBlur = (event) => {
+    setEmail(event.target.value);
   }
 
   const handlePasswordBlur = (event) => {
-    console.log(event.target.value);
+    setPassword(event.target.value);
   }
 
   const handleSubmit = (event) => {
-    console.log('form submitted')
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch(error => {
+        console.error(error)
+      })
     event.preventDefault()
-  } 
+  }
   return (
     <div>
-      <h2 className='text-center'>Email Password Authentication</h2>
+      <h2 className='text-center'>Email and Password Authentication</h2>
 
       {/* <form onSubmit={handleSubmit}>
         <input onBlur={handleEmailBlur} type="email" placeholder='email' />
@@ -40,16 +51,13 @@ function App() {
             <Form.Label>Email address</Form.Label>
             <Form.Control onBlur={handleEmailBlur} type="email" placeholder="Enter email" />
             <Form.Text className="text-muted">
-              
+
             </Form.Text>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control onBlur={handlePasswordBlur} type="password" placeholder="Password" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
           <Button variant="primary" type="submit">
             Submit
