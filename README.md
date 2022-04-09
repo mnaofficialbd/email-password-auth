@@ -1,5 +1,5 @@
 ## Email Password authentication (Firebase)
-### Live Project link:  https://mnaofficialbd.github.io/email-password-auth/
+### Live Project link:  https://web-email-password-auth.netlify.app/
 * Sign-In and Register Form
 #### Sign-in method: 
 * Sign-in providers ==> Email / Password
